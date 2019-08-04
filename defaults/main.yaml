@@ -1,0 +1,5 @@
+---
+
+docker_daemon_options:
+  group: docker
+  log-driver: journald

@@ -1,0 +1,9 @@
+---
+
+docker_repo_url: "https://download.docker.com/linux/centos/{{ ansible_distribution_major_version }}/$basearch/stable"
+docker_key_url: https://download.docker.com/linux/centos/gpg
+
+docker_pre_packages:
+  - yum-utils
+  - device-mapper-persistent-data
+  - lvm2

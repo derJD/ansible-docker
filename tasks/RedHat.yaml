@@ -1,0 +1,6 @@
+---
+
+- name: add repo key
+  rpm_key: key={{ docker_key_url }}
+- name: add repository
+  yum_repository: name=docker baseurl={{ docker_repo_url }}
