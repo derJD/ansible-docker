@@ -1,7 +1,7 @@
 docker
 ======
 
-Installs docker-ce and manage configuration with [daemon.json](https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-configuration-file).
+Installs docker-ce and docker-compose. This role manages daemon configuration as well via [/etc/docker/daemon.json](https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-configuration-file).
 I think it is a bit more convinient configuring the docker daemon with its configuration file instead of passing flags via environments.
 
 Requirements
@@ -16,6 +16,7 @@ Role Variables
 | -------- | ---- | ------- | ----------- |
 | `docker_daemon_options` | dict | `{group: docker, log-driver: journald}` | Dictionary containing all settings for daemon.json |
 | `docker_packages` | list | `[docker-ce, docker-ce-cli, containerd.io, docker-compose]` | List containing packages which should be installed |
+| `docker_os_skip_list` | list | `[CoreOS, Coreos]` | List of operatingsystems that don't require package installation |
 
 There are a bunch of Variables which values depends on os:
 * `docker_repo_url`

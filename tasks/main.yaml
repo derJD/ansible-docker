@@ -1,16 +1,19 @@
 ---
 
-- name: include vars dependent on os family
-  include_vars: "vars/{{ ansible_os_family }}.yaml"
+- name: get docker
+  when: 'ansible_os_family not in docker_os_skip_list'
+  block:
+    - name: include vars dependent on os family
+      include_vars: "vars/{{ ansible_os_family }}.yaml"
 
-- name: install prerequired packages
-  package: name={{ docker_pre_packages }} state=present
+    - name: install prerequired packages
+      package: name={{ docker_pre_packages }} state=present
 
-- name: include tasks dependent on os family
-  include_tasks: "{{ ansible_os_family }}.yaml"
+    - name: include tasks dependent on os family
+      include_tasks: "{{ ansible_os_family }}.yaml"
 
-- name: install docker packages
-  package: name={{ docker_packages }} state=present
+    - name: install docker packages
+      package: name={{ docker_packages }} state=present
 
 - debug: msg={{ docker_daemon_options | to_nice_json(indent=2) }}
 - name: /etc/docker/daemon.json
