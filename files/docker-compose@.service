@@ -1,0 +1,23 @@
+[Unit]
+Description=%i service with docker-compose
+Requires=docker.service
+After=docker.service
+
+[Service]
+Restart=always
+
+WorkingDirectory=/etc/docker/compose/
+
+# Compose up
+ExecStart=-/usr/bin/docker-compose -f  /etc/docker/compose/%i.yml -p %i up
+
+# Cmopose update workarround
+ExecReload=/usr/bin/docker-compose -f /etc/docker/compose/%i.yml -p %i down --remove-orphans
+ExecReload=/usr/bin/docker-compose -f /etc/docker/compose/%i.yml -p %i pull --ignore-pull-failures
+ExecReload=/usr/bin/docker-compose -f  /etc/docker/compose/%i.yml -p %i up
+
+# Compose down, remove containers
+ExecStop=/usr/bin/docker-compose -f /etc/docker/compose/%i.yml -p %i down --remove-orphans
+
+[Install]
+WantedBy=multi-user.target
