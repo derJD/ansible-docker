@@ -9,15 +9,15 @@ Restart=always
 WorkingDirectory=/etc/docker/compose/
 
 # Compose up
-ExecStart=-/usr/bin/docker-compose -f  /etc/docker/compose/%i.yml -p %i up
+ExecStart=-docker compose -f  /etc/docker/compose/%i.yml -p %i up
 
 # Cmopose update workarround
-ExecReload=/usr/bin/docker-compose -f /etc/docker/compose/%i.yml -p %i down --remove-orphans
-ExecReload=/usr/bin/docker-compose -f /etc/docker/compose/%i.yml -p %i pull --ignore-pull-failures
-ExecReload=/usr/bin/docker-compose -f  /etc/docker/compose/%i.yml -p %i up
+ExecReload=docker compose -f /etc/docker/compose/%i.yml -p %i down --remove-orphans
+ExecReload=docker compose -f /etc/docker/compose/%i.yml -p %i pull --ignore-pull-failures
+ExecReload=docker compose -f  /etc/docker/compose/%i.yml -p %i up
 
 # Compose down, remove containers
-ExecStop=/usr/bin/docker-compose -f /etc/docker/compose/%i.yml -p %i down --remove-orphans
+ExecStop=docker compose -f /etc/docker/compose/%i.yml -p %i down --remove-orphans
 
 [Install]
 WantedBy=multi-user.target
