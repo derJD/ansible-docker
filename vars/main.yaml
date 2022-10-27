@@ -3,9 +3,3 @@
 docker_os_skip_list:
   - CoreOS
   - Coreos
-
-docker_packages:
-  - docker-ce
-  - docker-ce-cli
-  - containerd.io
-  - docker-compose

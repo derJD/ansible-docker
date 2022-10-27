@@ -5,3 +5,9 @@ docker_daemon_options:
   log-driver: journald
 
 docker_compose_service: false
+
+docker_packages:
+  - docker-ce
+  - docker-ce-cli
+  - containerd.io
+  - docker-compose
